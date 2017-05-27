@@ -20,7 +20,7 @@ Unofortonatly the "WebHook" notifications in RunDeck did not work properly as th
 * Fill in the name of the channel you want the notifications to go too. 
 
 ### Global properties 
-This following properties can be set at the framework or project level in the relevant config files.
+This following properties can be set at the framework or project level in the relevant config files if you want the config to be universially the same.
 
 __WebHook URL__
 
