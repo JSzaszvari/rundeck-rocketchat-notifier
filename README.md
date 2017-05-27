@@ -34,7 +34,8 @@ project level: project.plugin.Notification.RocketChatNotification.room=#general
 framework level: framework.plugin.Notification.RocketChatNotification.room=#general
 
 
-Example:
+### Screen-Shots:
+![Example Notifications](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/example.png "Example Notification")
 ![Example Config](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/config.png "Example Config")
 
 # Building from Source
