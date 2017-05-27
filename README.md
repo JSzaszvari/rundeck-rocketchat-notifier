@@ -25,11 +25,14 @@ This following properties can be set at the framework or project level in the re
 __WebHook URL__
 
 __project level:__ project.plugin.Notification.RocketChatNotification.webhook_url=value
+
 __framework level:__ framework.plugin.Notification.RocketChatNotification.webhook_url=value
+
 
 __Channel__
 
 __project level:__ project.plugin.Notification.RocketChatNotification.room=#general
+
 __framework level:__ framework.plugin.Notification.RocketChatNotification.room=#general
 
 
