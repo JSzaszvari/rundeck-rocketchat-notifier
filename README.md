@@ -1,8 +1,12 @@
 # rundeck-rocketchat-notifier
 A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications directly into a Rocket.Chat instance. 
 
+Unofortonatly the "WebHook" notifications in RunDeck did not work properly as the implementation is different. 
+
+
 # Features
 * Specify different channels for Success/Failure notifications.  
+* Pretty notifications (maybe)
 
 # Installing
 * The quickest/easiest way is to get the pre-compiled .jar from the GitHub Releases page -  [The latest can be found here](https://github.com/jszaszvari/rundeck-rocketchat-notifier/releases/download/v0.1/rundeck-rocketchat-notifier-0.1.jar) 
@@ -19,3 +23,8 @@ Once the build is complete the compiled .jar will be in be in the build/libs fol
 
 # Configuring
 * Set up a Incoming Intergration in Rocket.Chat and take note of the URL
+* Put the URL in the 'Rocket.Chat WebHook URL' field 
+* Fill in the name of the channel you want the notifications to go too. 
+
+See the image below for an example
+![Example Config](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/config.png "Example Config")
