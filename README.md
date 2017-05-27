@@ -23,10 +23,12 @@ Unofortonatly the "WebHook" notifications in RunDeck did not work properly as th
 This following properties can be set at the framework or project level in the relevant config files.
 
 __WebHook URL__
-project level: project.plugin.Notification.RocketChatNotification.webhook_url=value
-framework level: framework.plugin.Notification.RocketChatNotification.webhook_url=value
+
+__project level:__ project.plugin.Notification.RocketChatNotification.webhook_url=value
+__framework level:__ framework.plugin.Notification.RocketChatNotification.webhook_url=value
 
 __Channel__
+
 __project level:__ project.plugin.Notification.RocketChatNotification.room=#general
 __framework level:__ framework.plugin.Notification.RocketChatNotification.room=#general
 
