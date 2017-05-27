@@ -6,20 +6,12 @@ Unofortonatly the "WebHook" notifications in RunDeck did not work properly as th
 
 # Features
 * Specify different channels for Success/Failure notifications.  
-* Pretty notifications (maybe)
+* Different colour notifications for Success/Fail/Start
 
 # Installing
 * The quickest/easiest way is to get the pre-compiled .jar from the GitHub Releases page -  [The latest can be found here](https://github.com/jszaszvari/rundeck-rocketchat-notifier/releases/download/v0.1/rundeck-rocketchat-notifier-0.1.jar) 
 * Place the .jar into your RunDeck plugins folder located at $RDECK_BASE/libext/ - The default Debian/Ubuntu plugin folder for RunDeck should be /var/lib/rundeck/libext/
 * Restart RunDeck
-
-# Building from Source
-```sh
-$ git clone git@github.com:jszaszvari/rundeck-rocketchat-notifier.git
-$ cd rundeck-rocketchat-notifier
-$ gradle build
-```
-Once the build is complete the compiled .jar will be in be in the build/libs folder. Initial build should take a few mins to run, subsequent builds should take a few seconds.
 
 # Configuring
 * Set up a Incoming Intergration in Rocket.Chat and take note of the URL
@@ -29,3 +21,11 @@ Once the build is complete the compiled .jar will be in be in the build/libs fol
 
 Example:
 ![Example Config](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/config.png "Example Config")
+
+# Building from Source
+```sh
+$ git clone git@github.com:jszaszvari/rundeck-rocketchat-notifier.git
+$ cd rundeck-rocketchat-notifier
+$ gradle build
+```
+Once the build is complete the compiled .jar will be in be in the build/libs folder. Initial build should take a few mins to run, subsequent builds should take a few seconds.
