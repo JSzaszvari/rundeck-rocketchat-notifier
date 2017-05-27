@@ -34,10 +34,6 @@ project level: project.plugin.Notification.RocketChatNotification.room=#general
 framework level: framework.plugin.Notification.RocketChatNotification.room=#general
 
 
-### Screen-Shots:
-![Example Notifications](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/example.png "Example Notification")
-![Example Config](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/config.png "Example Config")
-
 # Building from Source
 ```sh
 $ git clone git@github.com:jszaszvari/rundeck-rocketchat-notifier.git
@@ -45,3 +41,11 @@ $ cd rundeck-rocketchat-notifier
 $ gradle build
 ```
 Once the build is complete the compiled .jar will be in be in the build/libs folder. Initial build should take a few mins to run, subsequent builds should take a few seconds.
+
+### Screen-Shots:
+#### Notifications
+![Example Notifications](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/example.png "Example Notification")
+
+#### Configuration
+![Example Config](https://github.com/jszaszvari/rundeck-rocketchat-notifier/blob/master/config.png "Example Config")
+
