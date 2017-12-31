@@ -19,21 +19,6 @@ Unofortonatly the "WebHook" notifications in RunDeck did not work properly as th
 * Put the URL in the 'Rocket.Chat WebHook URL' field 
 * Fill in the name of the channel you want the notifications to go too. 
 
-### Global properties 
-This following properties can be set at the framework or project level in the relevant config files if you want the config to be universially the same.
-
-#### WebHook URL
-project level - project.plugin.Notification.RocketChatNotification.webhook_url=value
-
-framework level: framework.plugin.Notification.RocketChatNotification.webhook_url=value
-
-
-#### Channel
-project level: project.plugin.Notification.RocketChatNotification.room=#general
-
-framework level: framework.plugin.Notification.RocketChatNotification.room=#general
-
-
 # Building from Source
 ```sh
 $ git clone git@github.com:jszaszvari/rundeck-rocketchat-notifier.git
