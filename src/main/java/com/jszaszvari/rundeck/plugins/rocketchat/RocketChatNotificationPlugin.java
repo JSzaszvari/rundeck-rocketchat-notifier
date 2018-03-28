@@ -2,6 +2,7 @@
  *  MIT LICENCE
  *
  *  Copyright 2017 - John Szaszvari <jszaszvari@gmail.com>
+ *  Copyright 2018 - Infrabel Linux team <pieter.depraetere@infrabel.be>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +50,8 @@ import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
+import org.json.*;
 
 
 @Plugin(service= "Notification", name="RocketChatNotification")
@@ -113,7 +116,10 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
         String rocketResponse = invokeRocketChatAPIMethod(webhook_url, message);
         String ms = "payload=" + URLEncoder.encode(message);
 
-        if ("ok".equals(rocketResponse)) {
+        JSONObject rocketResponseObj = new JSONObject(rocketResponse);
+        Boolean rocketResponseStatus = rocketResponseObj.getBoolean("success");
+
+        if (rocketResponseStatus == true) {
             return true;
         } else {
             throw new RocketChatNotificationPluginException("Unknown status returned from Rocket.Chat: [" + rocketResponse + "]." + "\n" + ms);

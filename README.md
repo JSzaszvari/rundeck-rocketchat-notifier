@@ -14,7 +14,7 @@ Unofortonatly the "WebHook" notifications in RunDeck did not work properly as th
 * Restart RunDeck
 
 # Configuring
-* Set up a Incoming Intergration in Rocket.Chat and take note of the URL
+* Set up a Incoming Integration in Rocket.Chat and take note of the URL
 * Turn on Job notifications for something you want to be alerted for
 * Put the URL in the 'Rocket.Chat WebHook URL' field 
 * Fill in the name of the channel you want the notifications to go too. 
