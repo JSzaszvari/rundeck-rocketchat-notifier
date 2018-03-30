@@ -91,7 +91,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
             title = "Template",
             description = "Message template.",
             required = true,
-            defaultValue = "rocket-chat-patching-message.ftl"
+            defaultValue = ROCKET_CHAT_MESSAGE_TEMPLATE
     )
     private String message_template;
 
