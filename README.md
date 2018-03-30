@@ -5,12 +5,12 @@ A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications dir
 # Features
 * Specify different channels for Success/Failure notifications.  
 * Different colour notifications for Success/Fail/Start.
-* Different templates for messages.
+* Several kinds of messages supported by different templates.
 
 # Installing
-* The quickest/easiest way is to get the pre-compiled .jar from the GitHub Releases page -  [The latest can be found here](https://github.com/jszaszvari/rundeck-rocketchat-notifier/releases/download/v0.3/rundeck-rocketchat-notifier-0.3.jar)
-* Place the .jar into your RunDeck plugins folder located at `$RDECK_BASE/libext/`, by default `/var/lib/rundeck/libext/`.
-* Restart RunDeck
+* Build the JAR from source.
+* Place the `.jar` into your RunDeck plugins folder located at `$RDECK_BASE/libext/`, by default `/var/lib/rundeck/libext/`.
+* Restart RunDeck.
 
 # Configuration
 * Set up a Incoming Integration in Rocket.Chat and take note of the URL.
