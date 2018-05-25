@@ -95,6 +95,14 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
     )
     private String message_template;
 
+    @PluginProperty(
+            title = "Message on abort",
+            description = "Send a message when a job is aborted.",
+            required = true,
+            defaultValue = false
+    )
+    private boolean message_on_abort;
+
   
     public boolean postNotification(String trigger, Map executionData, Map config) {
 
@@ -118,6 +126,10 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
 
         if (!TRIGGER_NOTIFICATION_DATA.containsKey(trigger)) {
             throw new IllegalArgumentException("Unknown trigger type: [" + trigger + "].");
+        }
+
+        if (!message_on_abort && executionData.status == 'aborted') {
+            return true;
         }
 
         String message = generateMessage(trigger, executionData, config, room);
