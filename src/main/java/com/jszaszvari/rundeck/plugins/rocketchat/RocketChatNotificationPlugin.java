@@ -99,7 +99,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
             title = "Message on abort",
             description = "Send a message when a job is aborted.",
             required = true,
-            defaultValue = false
+            defaultValue = "false"
     )
     private boolean message_on_abort;
 
@@ -128,7 +128,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
             throw new IllegalArgumentException("Unknown trigger type: [" + trigger + "].");
         }
 
-        if (!message_on_abort && executionData.status == 'aborted') {
+        if (!message_on_abort && executionData.get("status") == "aborted") {
             return true;
         }
 
