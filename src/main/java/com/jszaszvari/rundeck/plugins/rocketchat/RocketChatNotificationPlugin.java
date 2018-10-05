@@ -128,7 +128,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
             throw new IllegalArgumentException("Unknown trigger type: [" + trigger + "].");
         }
 
-        if (!message_on_abort && executionData.get("status") == "aborted") {
+        if (!message_on_abort && (executionData.get("status") == "aborted" || executionData.get("status") == "scheduled")) {
             return true;
         }
 
