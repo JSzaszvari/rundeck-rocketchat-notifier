@@ -2,6 +2,7 @@
  *  MIT LICENCE
  *
  *  Copyright 2017 - John Szaszvari <jszaszvari@gmail.com>
+ *  Copyright 2018 - Infrabel Linux team <pieter.depraetere@infrabel.be>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -50,6 +51,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+import org.json.*;
+
 
 @Plugin(service= "Notification", name="RocketChatNotification")
 @PluginDescription(title="Rocket.Chat Notification", description="Sends a Rundeck Notification to Rocket.Chat")
@@ -79,10 +82,26 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
     
     @PluginProperty(
             title = "Channel",
-            description = "Set the Rocket.Chat channel to send notification messages to.",
+            description = "The Rocket.Chat channel to send notification messages to.",
             required = true,
             defaultValue = "#general")
     private String room;
+
+    @PluginProperty(
+            title = "Template",
+            description = "Message template.",
+            required = true,
+            defaultValue = ROCKET_CHAT_MESSAGE_TEMPLATE
+    )
+    private String message_template;
+
+    @PluginProperty(
+            title = "Message on abort",
+            description = "Send a message when a job is aborted.",
+            required = true,
+            defaultValue = "false"
+    )
+    private boolean message_on_abort;
 
   
     public boolean postNotification(String trigger, Map executionData, Map config) {
@@ -93,7 +112,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
             TemplateLoader[] loaders = new TemplateLoader[]{builtInTemplate};
             MultiTemplateLoader mtl = new MultiTemplateLoader(loaders);
             FREEMARKER_CFG.setTemplateLoader(mtl);
-            ACTUAL_ROCKET_CHAT_TEMPLATE = ROCKET_CHAT_MESSAGE_TEMPLATE;
+            ACTUAL_ROCKET_CHAT_TEMPLATE = message_template;
 
         TRIGGER_NOTIFICATION_DATA.put(TRIGGER_START,   new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_YELLOW));
         TRIGGER_NOTIFICATION_DATA.put(TRIGGER_SUCCESS, new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_GREEN));
@@ -102,18 +121,25 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
         try {
             FREEMARKER_CFG.setSetting(Configuration.CACHE_STORAGE_KEY, "strong:20, soft:250");
         }catch(Exception e){
-            System.err.printf("Got and exception from Freemarker: %s", e.getMessage());
+            System.err.printf("Got an exception from Freemarker: %s", e.getMessage());
         }
 
         if (!TRIGGER_NOTIFICATION_DATA.containsKey(trigger)) {
             throw new IllegalArgumentException("Unknown trigger type: [" + trigger + "].");
         }
 
+        if (!message_on_abort && (executionData.get("status") == "aborted" || executionData.get("status") == "scheduled")) {
+            return true;
+        }
+
         String message = generateMessage(trigger, executionData, config, room);
         String rocketResponse = invokeRocketChatAPIMethod(webhook_url, message);
         String ms = "payload=" + URLEncoder.encode(message);
 
-        if ("ok".equals(rocketResponse)) {
+        JSONObject rocketResponseObj = new JSONObject(rocketResponse);
+        Boolean rocketResponseStatus = rocketResponseObj.getBoolean("success");
+
+        if (rocketResponseStatus == true) {
             return true;
         } else {
             throw new RocketChatNotificationPluginException("Unknown status returned from Rocket.Chat: [" + rocketResponse + "]." + "\n" + ms);
@@ -130,12 +156,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
         model.put("executionData", executionData);
         model.put("config", config);
         model.put("channel", channel);
-//        if(username != null && !username.isEmpty()) {
-//            model.put("username", username);
-//        }
-//        if(icon_url != null && !icon_url.isEmpty()) {
-//            model.put("icon_url", icon_url);
-//        }
+
         StringWriter sw = new StringWriter();
         try {
             Template template = FREEMARKER_CFG.getTemplate(templateName);

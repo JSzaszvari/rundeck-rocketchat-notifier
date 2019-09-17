@@ -1,6 +1,6 @@
 apply plugin: 'java'
 sourceCompatibility = 1.6
-project.version = 0.1
+project.version = 0.6
 defaultTasks 'clean', 'build'
 
 configurations{
@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
     pluginLibs group: 'org.freemarker', name: 'freemarker', version: '2.3.20'
+    pluginLibs group: 'org.json', name: 'json', version: '20180130'
     compile(group:'org.rundeck', name: 'rundeck-core', version: '2.1.1')
 }
 
