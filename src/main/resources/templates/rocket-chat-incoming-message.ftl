@@ -8,6 +8,8 @@
     <#assign state="Started">
 <#elseif trigger == "failure">
     <#assign state="Failed">
+<#elseif trigger == "avgduration">
+    <#assign state="Failed (Average duration exceeded)">
 <#else>
     <#assign state="Succeeded">
 </#if>

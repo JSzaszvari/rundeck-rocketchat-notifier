@@ -69,6 +69,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
     private static final String TRIGGER_START = "start";
     private static final String TRIGGER_SUCCESS = "success";
     private static final String TRIGGER_FAILURE = "failure";
+    private static final String TRIGGER_AVGDURATION = "avgduration";
 
     private static final Map<String, RocketChatNotificationData> TRIGGER_NOTIFICATION_DATA = new HashMap<String, RocketChatNotificationData>();
 
@@ -117,6 +118,7 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
         TRIGGER_NOTIFICATION_DATA.put(TRIGGER_START,   new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_YELLOW));
         TRIGGER_NOTIFICATION_DATA.put(TRIGGER_SUCCESS, new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_GREEN));
         TRIGGER_NOTIFICATION_DATA.put(TRIGGER_FAILURE, new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_RED));
+        TRIGGER_NOTIFICATION_DATA.put(TRIGGER_AVGDURATION, new RocketChatNotificationData(ACTUAL_ROCKET_CHAT_TEMPLATE, ROCKET_CHAT_MESSAGE_COLOR_RED));
 
         try {
             FREEMARKER_CFG.setSetting(Configuration.CACHE_STORAGE_KEY, "strong:20, soft:250");
