@@ -10,6 +10,8 @@
     <#assign state="Failed">
 <#elseif trigger == "avgduration">
     <#assign state="Failed (Average duration exceeded)">
+<#elseif trigger == "retryablefailure">
+    <#assign state="Failed (Retry job failure)">
 <#else>
     <#assign state="Succeeded">
 </#if>
