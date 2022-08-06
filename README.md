@@ -20,10 +20,33 @@ A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications dir
 * (Optional) Chose a template. The default template is `rocket-chat-incoming-message.ftl`.
 
 # Building from Source
+
+This works fine with openjdk-8-jre and openjdk-8-jre works fine in Ubuntu 20.04.04 LTS (focal):
+
+### On Ubuntu 20 example:
+
+Install openjdk-8-jre:
+
 ```sh
-$ git clone git@github.com:InfrabelLinux/rundeck-rocketchat-notifier.git
+$ sudo apt install openjdk-8-jre
+```
+
+Install openjdk-8-jdk:
+
+```sh
+$ sudo apt install openjdk-8-jdk
+```
+### Clone and build:
+
+```sh
+$ git clone https://github.com/JSzaszvari/rundeck-rocketchat-notifier.git
 $ cd rundeck-rocketchat-notifier
-$ gradle build
+```
+
+Use ./gradlew at local folder to build and run with gradle 1.10 (will be download and exec in build process)
+
+```sh
+$ ./gradlew build
 ```
 Once the build is complete the compiled .jar will be in be in the build/libs folder. Initial build should take a few minutes to run, subsequent builds should take a few seconds.
 
