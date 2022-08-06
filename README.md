@@ -1,10 +1,10 @@
 # rundeck-rocketchat-notifier
-A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications directly into a Rocket.Chat instance in a relatively good looking manner. 
+A RunDeck plugin that allows jobs to post Start/Sucess/Failure/Avgduration/Retryablefailure notifications directly into a Rocket.Chat instance in a relatively good looking manner. 
 
 
 # Features
-* Specify different channels for Success/Failure notifications.  
-* Different colour notifications for Success/Fail/Start.
+* Specify different channels for Start/Sucess/Failure/Avgduration/Retryablefailure.  
+* Different colour notifications for Start/Sucess/Failure/Avgduration/Retryablefailure.
 * Several kinds of messages supported by different templates.
 
 # Installing
@@ -21,7 +21,7 @@ A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications dir
 
 # Building from Source
 
-This works fine with openjdk-8-jre and openjdk-8-jre works fine in Ubuntu 20.04.04 LTS (focal):
+This works fine with openjdk-8-jre and openjdk-8-jre on Ubuntu 20.04.04 LTS (focal):
 
 ### On Ubuntu 20 example:
 
@@ -39,7 +39,7 @@ $ sudo apt install openjdk-8-jdk
 ### Clone and build:
 
 ```sh
-$ git clone https://github.com/JSzaszvari/rundeck-rocketchat-notifier.git
+$ git clone git@github.com:tigo17/rundeck-rocketchat-notifier.git
 $ cd rundeck-rocketchat-notifier
 ```
 
