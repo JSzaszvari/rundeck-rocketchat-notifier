@@ -4,3 +4,6 @@ target
 build
 .gradle
 classes
+.vscode
+bin
+build
