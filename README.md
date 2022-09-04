@@ -1,10 +1,10 @@
 # rundeck-rocketchat-notifier
-A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications directly into a Rocket.Chat instance in a relatively good looking manner. 
+A RunDeck plugin that allows jobs to post Start/Sucess/Failure/Avgduration/Retryablefailure notifications directly into a Rocket.Chat instance in a relatively good looking manner. 
 
 
 # Features
-* Specify different channels for Success/Failure notifications.  
-* Different colour notifications for Success/Fail/Start.
+* Specify different channels for Start/Sucess/Failure/Avgduration/Retryablefailure.  
+* Different colour notifications for Start/Sucess/Failure/Avgduration/Retryablefailure.
 * Several kinds of messages supported by different templates.
 
 # Installing
@@ -20,10 +20,33 @@ A RunDeck plugin that allows jobs to post Start/Sucess/Failure notifications dir
 * (Optional) Chose a template. The default template is `rocket-chat-incoming-message.ftl`.
 
 # Building from Source
+
+This works fine with openjdk-8-jre and openjdk-8-jre on Ubuntu 20.04.04 LTS (focal):
+
+### On Ubuntu 20 example:
+
+Install openjdk-8-jre:
+
 ```sh
-$ git clone git@github.com:InfrabelLinux/rundeck-rocketchat-notifier.git
+$ sudo apt install openjdk-8-jre
+```
+
+Install openjdk-8-jdk:
+
+```sh
+$ sudo apt install openjdk-8-jdk
+```
+### Clone and build:
+
+```sh
+$ git clone git@github.com:tigo17/rundeck-rocketchat-notifier.git
 $ cd rundeck-rocketchat-notifier
-$ gradle build
+```
+
+Use ./gradlew at local folder to build and run with gradle 1.10 (will be download and exec in build process)
+
+```sh
+$ ./gradlew build
 ```
 Once the build is complete the compiled .jar will be in be in the build/libs folder. Initial build should take a few minutes to run, subsequent builds should take a few seconds.
 
