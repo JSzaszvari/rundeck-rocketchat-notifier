@@ -1,5 +1,6 @@
 apply plugin: 'java'
-sourceCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 project.version = 0.7
 defaultTasks 'clean', 'build'
 
@@ -8,9 +9,11 @@ configurations{
     pluginLibs
 
     //declare compile to extend from pluginLibs so it inherits the dependencies
-    compile{
-        extendsFrom pluginLibs
+    // 'compile' is deprecated, use 'implementation'
+    implementation{
+        // extendsFrom pluginLibs // No longer needed for compilation classpath
     }
+    // pluginLibs remains for packaging purposes
 }
 
 repositories {
@@ -23,7 +26,20 @@ repositories {
 dependencies {
     pluginLibs group: 'org.freemarker', name: 'freemarker', version: '2.3.20'
     pluginLibs group: 'org.json', name: 'json', version: '20180130'
-    compile(group:'org.rundeck', name: 'rundeck-core', version: '2.1.1')
+    // Add all dependencies needed for compilation to 'implementation'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.20'
+    implementation group: 'org.json', name: 'json', version: '20180130'
+    implementation(group:'org.rundeck', name: 'rundeck-core', version: '2.1.1')
+}
+
+// Add JVM arguments to allow reflection access needed by older dependencies on newer Java versions
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.forkOptions.jvmArgs += '--add-opens=java.base/java.io=ALL-UNNAMED'
+}
+
+tasks.withType(Test) {
+    jvmArgs += '--add-opens=java.base/java.io=ALL-UNNAMED'
 }
 
 // task to copy plugin libs to output/lib dir
@@ -46,6 +62,3 @@ jar {
 //set jar task to depend on copyToLib
 jar.dependsOn(copyToLib)
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.10'
-}
