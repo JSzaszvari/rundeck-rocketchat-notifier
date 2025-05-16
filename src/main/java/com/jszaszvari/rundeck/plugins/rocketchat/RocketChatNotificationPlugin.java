@@ -43,6 +43,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 
+import java.nio.charset.StandardCharsets;
+import java.io.OutputStream;
+
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
@@ -189,7 +192,8 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
 
         HttpURLConnection connection = null;
         InputStream responseStream = null;
-        String body = "payload=" + URLEncoder.encode(message);
+        // String body = "payload=" + URLEncoder.encode(message);
+        String body = message;
         try {
             connection = openConnection(requestUrl);
             putRequestStream(connection, body);
@@ -223,15 +227,16 @@ public class RocketChatNotificationPlugin implements NotificationPlugin {
     private void putRequestStream(HttpURLConnection connection, String message) {
         try {
             connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Content-Type", "application/json");
+            // "charset=UTF-8");
+            //connection.setRequestProperty("charset", "utf-8");
 
             connection.setDoInput(true);
             connection.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(message);
-            wr.flush();
-            wr.close();
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(message.getBytes(StandardCharsets.UTF_8));
+            }
+
         } catch (IOException ioEx) {
             throw new RocketChatNotificationPluginException("Error putting data to Rocket.Chat: [" + ioEx.getMessage() + "].", ioEx);
         }
